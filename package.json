@@ -1,0 +1,27 @@
+{
+  "name": "shooter-game",
+  "version": "1.0.0",
+  "description": "Microverse Capstone Project",
+  "main": "index.js",
+  "repository": "https://github.com/eypsrcnuygr/shooter-game.git",
+  "author": "Eyüp Sercan UYGUR",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  },
+  "devDependencies": {
+    "babel-core": "6",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^6.3.2",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "phaser": "^3.0.0"
+  }
+}
