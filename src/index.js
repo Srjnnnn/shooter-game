@@ -1,11 +1,21 @@
-import 'phaser';
+import Phaser from 'phaser';
 
-import { SimpleScene } from './scenes/simple-scene';
+import SimpleScene from './scenes/simple-scene';
 
 const gameConfig = {
-  width: 680,
-  height: 400,
-  scene: SimpleScene
+  width: 1000,
+  height: 500,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: {
+        y: 0,
+        x: 0,
+      },
+      debug: false,
+    },
+  },
+  scene: SimpleScene,
 };
 
-new Phaser.Game(gameConfig);
+export default new Phaser.Game(gameConfig);

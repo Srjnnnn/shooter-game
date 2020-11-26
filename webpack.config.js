@@ -39,4 +39,5 @@ module.exports = {
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
   ],
+  devtool: 'source-map',
 };
