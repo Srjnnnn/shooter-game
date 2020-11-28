@@ -40,6 +40,8 @@ class SimpleScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.laser = this.add.group();
     this.laser.enableBody = true;
+    this.laser = this.laser.createMultiple(30, 'playerLaser');
+    this.laser = this.physics.add.sprite('playerLaser');
   }
 
   createEnemy() {
@@ -70,6 +72,10 @@ class SimpleScene extends Phaser.Scene {
     } else {
       this.player.setVelocityX(0);
       this.player.setVelocityY(0);
+    }
+
+    if (this.cursors.space.isDown) {
+      this.laser.setGravityY(-160);
     }
   }
 }

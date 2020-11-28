@@ -30,6 +30,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "phaser": "^3.0.0"
+    "phaser": "^3.24.1"
   }
 }
