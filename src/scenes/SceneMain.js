@@ -12,6 +12,7 @@ class SceneMain extends Phaser.Scene {
       frameWidth: 24, frameHeight: 22,
     });
     this.load.image('bullet', 'assets/bullet.png');
+    this.load.image('enemy', 'assets/eship.png');
   }
 
   create() {
@@ -21,6 +22,7 @@ class SceneMain extends Phaser.Scene {
     this.background.setOrigin(0, 0);
     this.ship = this.physics.add.sprite(this.centerX, this.centerY, 'ship');
     this.ship.scale = 0.65;
+    this.enemy = this.physics.add.image(this.centerX, 25, 'enemy');
     this.physics.world.setBounds(0, 0, this.background.displayWidth, this.background.displayHeight);
     this.background.setInteractive();
     this.background.on('pointerdown', this.backgroundClicked, this);
@@ -67,9 +69,13 @@ class SceneMain extends Phaser.Scene {
     const ty = this.background.input.localY;
     this.tx = tx;
     this.ty = ty;
-    let angle = this.physics.moveTo(this.ship, tx, ty, 80);
+    let angle = this.physics.moveTo(this.ship, tx, ty, 90);
     angle = this.toDegrees(angle);
     this.ship.angle = angle;
+
+    let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 50);
+    angle2 = this.toDegrees(angle2);
+    this.enemy.angle = angle2;
   }
 
   toDegrees(angle) {
