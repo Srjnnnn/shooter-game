@@ -41,6 +41,7 @@ class SceneMain extends Phaser.Scene {
       child.x = xx;
       child.y = yy;
     });
+    this.physics.add.overlap(this.ship, this.starGroup, this.collectStar, null, this);
   }
 
   backgroundClicked() {
@@ -55,6 +56,10 @@ class SceneMain extends Phaser.Scene {
 
   toDegrees(angle) {
     return angle * (180 / Math.PI);
+  }
+
+  collectStar(player, star) {
+    star.disableBody(true, true);
   }
 
   update() {
