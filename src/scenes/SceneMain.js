@@ -26,6 +26,7 @@ class SceneMain extends Phaser.Scene {
     this.background.on('pointerdown', this.backgroundClicked, this);
     this.cameras.main.setBounds(0, 0, this.background.displayWidth, this.background.displayHeight);
     this.cameras.main.startFollow(this.ship, true);
+    this.cursors = this.input.keyboard.createCursorKeys();
     this.starGroup = this.physics.add.group({
       key: 'stars',
       frame: [0],
@@ -44,12 +45,29 @@ class SceneMain extends Phaser.Scene {
     this.physics.add.overlap(this.ship, this.starGroup, this.collectStar, null, this);
   }
 
+  makeBullet() {
+    const dirObj = this.getDirFromAngle(this.ship.angle);
+    const bullet = this.physics.add.sprite(this.ship.x + dirObj.tx * 30, this.ship.y + dirObj.ty * 30, 'bullet');
+    bullet.angle = this.ship.angle;
+    bullet.body.setVelocity(dirObj.tx * 100, dirObj.ty * 100);
+  }
+
+  getDirFromAngle(angle) {
+    const rads = angle * (Math.PI / 180);
+    const tx = Math.cos(rads);
+    const ty = Math.sin(rads);
+    return {
+      tx,
+      ty,
+    };
+  }
+
   backgroundClicked() {
     const tx = this.background.input.localX;
     const ty = this.background.input.localY;
     this.tx = tx;
     this.ty = ty;
-    let angle = this.physics.moveTo(this.ship, tx, ty, 120);
+    let angle = this.physics.moveTo(this.ship, tx, ty, 80);
     angle = this.toDegrees(angle);
     this.ship.angle = angle;
   }
@@ -67,6 +85,9 @@ class SceneMain extends Phaser.Scene {
     const distY = Math.abs(this.ship.y - this.ty);
     if (distX < 10 && distY < 10) {
       this.ship.body.setVelocity(0, 0);
+    }
+    if (this.cursors.space.isDown) {
+      this.makeBullet()
     }
   }
 }
