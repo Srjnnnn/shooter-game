@@ -13,6 +13,7 @@ class SceneMain extends Phaser.Scene {
     });
     this.load.image('bullet', 'assets/bullet.png');
     this.load.image('enemy', 'assets/eship.png');
+    this.load.image('enemyBullet', 'assets/ebullet.png');
   }
 
   create() {
@@ -47,11 +48,27 @@ class SceneMain extends Phaser.Scene {
     this.physics.add.overlap(this.ship, this.starGroup, this.collectStar, null, this);
   }
 
+  getTimer() {
+    const date = new Date();
+    return date.getTime();
+  }
+
   makeBullet() {
     const dirObj = this.getDirFromAngle(this.ship.angle);
     const bullet = this.physics.add.sprite(this.ship.x + dirObj.tx * 30, this.ship.y + dirObj.ty * 30, 'bullet');
     bullet.angle = this.ship.angle;
     bullet.body.setVelocity(dirObj.tx * 100, dirObj.ty * 100);
+  }
+
+  fireEnemy() {
+    const elapsed = Math.abs(this.lastEbullet - this.getTimer());
+    if (elapsed < 500) {
+      return;
+    }
+    this.lastEbullet = this.getTimer();
+    const bullet = this.physics.add.sprite(this.enemy.x, this.enemy.y, 'enemyBullet');
+    bullet.body.angularVelocity = 10;
+    this.physics.moveTo(bullet, this.ship.x, this.ship.y, 50);
   }
 
   getDirFromAngle(angle) {
@@ -93,7 +110,12 @@ class SceneMain extends Phaser.Scene {
       this.ship.body.setVelocity(0, 0);
     }
     if (this.cursors.space.isDown) {
-      this.makeBullet()
+      this.makeBullet();
+    }
+    const distX2 = Math.abs(this.ship.x - this.enemy.x);
+    const distY2 = Math.abs(this.ship.y - this.enemy.y);
+    if (distX2 < this.game.config.width / 5 && distY2 < this.game.config.height / 5) {
+      this.fireEnemy();
     }
   }
 }
