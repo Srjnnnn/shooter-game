@@ -25,7 +25,8 @@ class SceneMain extends Phaser.Scene {
     this.background = this.add.image(0, 0, 'background');
     this.background.setOrigin(0, 0);
     this.shield = 100;
-    this.eShield = 100;
+    this.eShield = 1000;
+    this.point = 0;
     this.ship = this.physics.add.sprite(this.centerX, this.centerY, 'ship');
     this.ship.scale = 0.65;
     this.enemy = this.physics.add.image(this.centerX, 25, 'enemy');
@@ -65,6 +66,8 @@ class SceneMain extends Phaser.Scene {
       frameRate: 48,
       repeat: false,
     });
+
+    this.setTimer();
   }
 
   getTimer() {
@@ -79,15 +82,26 @@ class SceneMain extends Phaser.Scene {
 
   downEnemy() {
     this.eShield--;
-    this.text2 .setText(`Enemy shields\n${this.eShield}`);
+    this.text2.setText(`Enemy shields\n${this.eShield}`);
   }
 
   makeInfo() {
+    this.i = 0;
     this.text1 = this.add.text(50, 0, 'Shields\n100');
     this.text2 = this.add.text(300, 0, 'Enemy shields\n 1000');
+    this.text3 = this.add.text(150, 0, 'The point\n 0');
+    this.text4 = this.add.text(15, 100, `Time: ${this.i}`);
 
     this.text1.setScrollFactor(0);
     this.text2.setScrollFactor(0);
+    this.text3.setScrollFactor(0);
+    this.text4.setScrollFactor(0);
+  }
+
+  setTimer() {
+    setInterval(() => {
+      this.text4.setText(`Time: ${this.i++}`);
+    }, 1000);
   }
 
   makeBullet() {
@@ -154,6 +168,8 @@ class SceneMain extends Phaser.Scene {
 
   collectStar(player, star) {
     star.disableBody(true, true);
+    this.point++;
+    this.text3.setText(`The point\n${this.point}`);
   }
 
   update() {
