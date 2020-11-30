@@ -41,7 +41,7 @@ class SceneMain extends Phaser.Scene {
     this.starGroup = this.physics.add.group({
       key: 'stars',
       frame: [0],
-      frameQuantity: 20,
+      frameQuantity: 50,
       bounceX: 1,
       bounceY: 1,
       angularVelocity: 1,
