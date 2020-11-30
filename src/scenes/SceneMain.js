@@ -24,9 +24,13 @@ class SceneMain extends Phaser.Scene {
     this.centerY = window.game.config.height / 2;
     this.background = this.add.image(0, 0, 'background');
     this.background.setOrigin(0, 0);
+    this.shield = 100;
+    this.eShield = 100;
     this.ship = this.physics.add.sprite(this.centerX, this.centerY, 'ship');
     this.ship.scale = 0.65;
     this.enemy = this.physics.add.image(this.centerX, 25, 'enemy');
+    this.enemy.body.collideWorldBounds = true;
+    this.ship.body.collideWorldBounds = true;
     this.physics.world.setBounds(0, 0, this.background.displayWidth, this.background.displayHeight);
     this.background.setInteractive();
     this.background.on('pointerdown', this.backgroundClicked, this);
@@ -68,9 +72,19 @@ class SceneMain extends Phaser.Scene {
     return date.getTime();
   }
 
+  downPlayer() {
+    this.shield--;
+    this.text1.setText(`Shields\n${this.shield}`);
+  }
+
+  downEnemy() {
+    this.eShield--;
+    this.text2 .setText(`Enemy shields\n${this.eShield}`);
+  }
+
   makeInfo() {
     this.text1 = this.add.text(50, 0, 'Shields\n100');
-    this.text2 = this.add.text(300, 0, 'Enemy shields\n 100');
+    this.text2 = this.add.text(300, 0, 'Enemy shields\n 1000');
 
     this.text1.setScrollFactor(0);
     this.text2.setScrollFactor(0);
@@ -88,12 +102,14 @@ class SceneMain extends Phaser.Scene {
     const explosion = this.add.sprite(bullet.x, bullet.y, 'explosion');
     explosion.play('boom');
     bullet.destroy();
+    this.downEnemy();
   }
 
   damagePlayer(bullet, ship) {
     const explosion = this.add.sprite(ship.x, ship.y, 'explosion');
     explosion.play('boom');
     bullet.destroy();
+    this.downPlayer();
   }
 
   fireEnemy() {
@@ -127,7 +143,7 @@ class SceneMain extends Phaser.Scene {
     angle = this.toDegrees(angle);
     this.ship.angle = angle;
 
-    let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 50);
+    let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 70);
     angle2 = this.toDegrees(angle2);
     this.enemy.angle = angle2;
   }
