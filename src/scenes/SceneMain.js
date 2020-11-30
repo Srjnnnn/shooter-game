@@ -90,9 +90,11 @@ class SceneMain extends Phaser.Scene {
     bullet.destroy();
   }
 
-  // damagePlayer(ship, bullet) {
-
-  // }
+  damagePlayer(bullet, ship) {
+    const explosion = this.add.sprite(ship.x, ship.y, 'explosion');
+    explosion.play('boom');
+    bullet.destroy();
+  }
 
   fireEnemy() {
     const elapsed = Math.abs(this.lastEbullet - this.getTimer());
@@ -103,6 +105,7 @@ class SceneMain extends Phaser.Scene {
     const bullet = this.physics.add.sprite(this.enemy.x, this.enemy.y, 'enemyBullet');
     bullet.body.angularVelocity = 10;
     this.physics.moveTo(bullet, this.ship.x, this.ship.y, 50);
+    this.physics.add.collider(bullet, this.ship, this.damagePlayer, null, this);
   }
 
   getDirFromAngle(angle) {
