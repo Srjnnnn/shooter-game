@@ -14,6 +14,9 @@ class SceneMain extends Phaser.Scene {
     this.load.image('bullet', 'assets/bullet.png');
     this.load.image('enemy', 'assets/eship.png');
     this.load.image('enemyBullet', 'assets/ebullet.png');
+    this.load.spritesheet('explosion', 'assets/exp.png', {
+      frameWidth: 64, frameHeight: 64,
+    });
   }
 
   create() {
@@ -46,6 +49,18 @@ class SceneMain extends Phaser.Scene {
       child.y = yy;
     });
     this.physics.add.overlap(this.ship, this.starGroup, this.collectStar, null, this);
+    this.makeInfo();
+
+    const frameNames = this.anims.generateFrameNumbers('explosion');
+    const f2 = frameNames.slice();
+    f2.reverse();
+    const f3 = f2.concat(frameNames);
+    this.anims.create({
+      key: 'boom',
+      frames: f3,
+      frameRate: 48,
+      repeat: false,
+    });
   }
 
   getTimer() {
@@ -53,12 +68,31 @@ class SceneMain extends Phaser.Scene {
     return date.getTime();
   }
 
+  makeInfo() {
+    this.text1 = this.add.text(50, 0, 'Shields\n100');
+    this.text2 = this.add.text(300, 0, 'Enemy shields\n 100');
+
+    this.text1.setScrollFactor(0);
+    this.text2.setScrollFactor(0);
+  }
+
   makeBullet() {
     const dirObj = this.getDirFromAngle(this.ship.angle);
     const bullet = this.physics.add.sprite(this.ship.x + dirObj.tx * 30, this.ship.y + dirObj.ty * 30, 'bullet');
     bullet.angle = this.ship.angle;
     bullet.body.setVelocity(dirObj.tx * 100, dirObj.ty * 100);
+    this.physics.add.collider(bullet, this.enemy, this.damageEnemy, null, this);
   }
+
+  damageEnemy(bullet, ship) {
+    const explosion = this.add.sprite(bullet.x, bullet.y, 'explosion');
+    explosion.play('boom');
+    bullet.destroy();
+  }
+
+  // damagePlayer(ship, bullet) {
+
+  // }
 
   fireEnemy() {
     const elapsed = Math.abs(this.lastEbullet - this.getTimer());
