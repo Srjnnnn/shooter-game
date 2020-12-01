@@ -5,6 +5,7 @@ class Model {
     this.clock = 0;
     this.backgroundMusic = null;
     this.musicMode = true;
+    this.user = null;
   }
 }
 

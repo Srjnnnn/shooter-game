@@ -9,6 +9,9 @@ window.onload = () => {
     type: Phaser.AUTO,
     width: 480,
     height: 640,
+    dom: {
+      createContainer: true,
+    },
     parent: 'phaser-game',
     physics: {
       default: 'arcade',
