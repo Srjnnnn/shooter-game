@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import Model from '../Classes/Model';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
@@ -69,7 +68,6 @@ class SceneMain extends Phaser.Scene {
     });
 
     this.setTimer();
-    this.playerWon = null;
   }
 
   getTimer() {
@@ -81,7 +79,7 @@ class SceneMain extends Phaser.Scene {
     this.shield--;
     this.text1.setText(`Shields\n${this.shield}`);
     if (this.shield === 0) {
-      this.playerWon = false;
+      window.model.playerWon = false;
       this.clearTimer();
       this.scene.start('SceneOver');
     }
@@ -93,7 +91,7 @@ class SceneMain extends Phaser.Scene {
   }
 
   makeInfo() {
-    this.i = 0;
+    window.clock = 0;
     this.text1 = this.add.text(50, 0, 'Shields\n5');
     this.text2 = this.add.text(300, 0, 'Enemy shields\n 1000');
     this.text3 = this.add.text(150, 0, 'The point\n 0');
@@ -107,7 +105,7 @@ class SceneMain extends Phaser.Scene {
 
   setTimer() {
     this.timerVar = setInterval(() => {
-      this.text4.setText(`Time: ${this.i++}`);
+      this.text4.setText(`Time: ${window.model.clock += 1}`);
     }, 1000);
   }
 
@@ -183,7 +181,7 @@ class SceneMain extends Phaser.Scene {
     window.model.point += 1;
     this.text3.setText(`The point\n${window.model.point}`);
     if (window.model.point === 5) {
-      this.playerWon = true;
+      window.model.playerWon = true;
       this.clearTimer();
       this.scene.start('SceneOver');
     }
