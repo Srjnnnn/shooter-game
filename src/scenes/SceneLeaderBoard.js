@@ -7,13 +7,18 @@ export default class SceneLeaderBoard extends Phaser.Scene {
   }
 
   create() {
-    const fetched = Fetcher();
+    const fetched2 = Fetcher();
     let i = 0;
+    const array = [];
     (async () => {
-      await fetched.then(response => response.forEach(element => {
-        i += 40;
-        this.add.text(30, i, `The user is ${element.user}, the score is ${element.score}!`, { fontSize: '20px', fill: '#fff' });
+      await fetched2.then(response => response.forEach(element => {
+        array.push(element);
       }));
+      const array2 = array.sort((a, b) => b.score - a.score).slice(0, 10);
+      array2.forEach(elem => {
+        i += 40;
+        this.add.text(30, i, `The user is ${elem.user}, the score is ${elem.score}!`, { fontSize: '20px', fill: '#fff' });
+      });
     })();
   }
 }

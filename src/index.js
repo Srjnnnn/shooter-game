@@ -8,8 +8,8 @@ import SceneLeaderBoard from './scenes/SceneLeaderBoard';
 window.onload = () => {
   const config = {
     type: Phaser.AUTO,
-    width: 480,
-    height: 640,
+    width: 600,
+    height: 600,
     dom: {
       createContainer: true,
     },

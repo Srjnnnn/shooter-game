@@ -179,7 +179,7 @@ class SceneMain extends Phaser.Scene {
     star.disableBody(true, true);
     window.model.point += 1;
     this.text3.setText(`The point\n${window.model.point}`);
-    if (window.model.point === 5) {
+    if (window.model.point === 50) {
       window.model.playerWon = true;
       this.clearTimer();
       window.model.backgroundMusic.stop();
