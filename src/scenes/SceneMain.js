@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import GetTimer from '../Functions/GetTimer';
 import GetDirFromAngle from '../Functions/GetDirFromAngle';
 import ToDegres from '../Functions/ToDegres';
+import TimeClearer from '../Functions/TimeClearer';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
@@ -25,6 +26,7 @@ class SceneMain extends Phaser.Scene {
   }
 
   create() {
+    TimeClearer();
     this.centerX = window.game.config.width / 2;
     this.centerY = window.game.config.height / 2;
     this.background = this.add.image(0, 0, 'background');

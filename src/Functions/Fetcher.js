@@ -33,7 +33,8 @@ const Fetcher = () => {
       },
     ))
     .then(result => result.json())
-    .then(result => console.log(result));
+    .then(result => console.log(result))
+    .then(console.log(window.model.clock));
 };
 
 export default Fetcher;
