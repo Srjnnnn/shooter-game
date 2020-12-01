@@ -29,7 +29,6 @@ class SceneIntro extends Phaser.Scene {
       const name = this.element.getChildByName('name');
       if (name.value !== '') {
         window.model.user = name.value;
-        console.log(window.model.user);
       }
     });
   }
