@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
+import TimeClearer from '../Functions/TimeClearer';
 
 export default class SceneOver extends Phaser.Scene {
   constructor() {
@@ -17,16 +18,12 @@ export default class SceneOver extends Phaser.Scene {
     if (window.model.playerWon === true) {
       this.explanation = this.add.text(50, this.game.config.height / 2, `You've won the game\n Your score is ${window.model.point}`);
       this.explanation2 = this.add.text(50, this.game.config.height / 2 + 50, `Your time is: ${window.model.clock}`);
-      this.TimeClearer();
+      TimeClearer();
     } else {
       this.explanation = this.add.text(50, this.game.config.height / 2, `You've lost the game\n Your score is ${window.model.point}`);
       this.explanation2 = this.add.text(50, this.game.config.height / 2 + 50, `Your time is: ${window.model.clock}`);
-      this.TimeClearer();
+      TimeClearer();
     }
     this.btnStart = new Button(this, 400, this.game.config.height / 2 + 50, 'Re-play', 'Re-play', '', 'SceneIntro');
-  }
-
-  TimeClearer() {
-    window.model.clock = 0;
   }
 }

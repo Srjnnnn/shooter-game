@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
+import Toggler from '../Functions/Toggler';
 
 class SceneIntro extends Phaser.Scene {
   constructor() {
@@ -19,21 +20,7 @@ class SceneIntro extends Phaser.Scene {
       window.model.backgroundMusic.play();
       window.model.musicMode = false;
     }
-    this.SoundButton.on('pointerdown', () => this.toggler());
-  }
-
-  update() {
-    
-  }
-
-  toggler() {
-    if (window.model.musicMode) {
-      window.model.backgroundMusic.stop();
-      window.model.musicMode = false;
-    } else {
-      window.model.backgroundMusic.play();
-      window.model.musicMode = true;
-    }
+    this.SoundButton.on('pointerdown', () => Toggler());
   }
 }
 

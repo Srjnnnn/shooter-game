@@ -1,4 +1,7 @@
 import Phaser from 'phaser';
+import GetTimer from '../Functions/GetTimer';
+import GetDirFromAngle from '../Functions/GetDirFromAngle';
+import ToDegres from '../Functions/ToDegres';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
@@ -74,13 +77,8 @@ class SceneMain extends Phaser.Scene {
     this.explode = this.sound.add('explode', { loop: false });
   }
 
-  getTimer() {
-    const date = new Date();
-    return date.getTime();
-  }
-
   downPlayer() {
-    this.shield--;
+    this.shield -= 1;
     this.text1.setText(`Shields\n${this.shield}`);
     if (this.shield === 0) {
       window.model.playerWon = false;
@@ -92,7 +90,7 @@ class SceneMain extends Phaser.Scene {
   }
 
   downEnemy() {
-    this.eShield--;
+    this.eShield -= 1;
     this.text2.setText(`Enemy shields\n${this.eShield}`);
     if (this.eShield === 0) {
       this.enemy.destroy();
@@ -125,7 +123,7 @@ class SceneMain extends Phaser.Scene {
 
 
   makeBullet() {
-    const dirObj = this.getDirFromAngle(this.ship.angle);
+    const dirObj = GetDirFromAngle(this.ship.angle);
     const bullet = this.physics.add.sprite(this.ship.x + dirObj.tx * 30, this.ship.y + dirObj.ty * 30, 'bullet');
     bullet.angle = this.ship.angle;
     bullet.body.setVelocity(dirObj.tx * 100, dirObj.ty * 100);
@@ -147,27 +145,17 @@ class SceneMain extends Phaser.Scene {
   }
 
   fireEnemy() {
-    const elapsed = Math.abs(this.lastEbullet - this.getTimer());
+    const elapsed = Math.abs(this.lastEbullet - GetTimer());
     if (elapsed < 500) {
       return;
     }
     if (this.enemy.body) {
-      this.lastEbullet = this.getTimer();
+      this.lastEbullet = GetTimer();
       const bullet = this.physics.add.sprite(this.enemy.x, this.enemy.y, 'enemyBullet');
       bullet.body.angularVelocity = 10;
       this.physics.moveTo(bullet, this.ship.x, this.ship.y, 50);
       this.physics.add.collider(bullet, this.ship, this.damagePlayer, null, this);
     }
-  }
-
-  getDirFromAngle(angle) {
-    const rads = angle * (Math.PI / 180);
-    const tx = Math.cos(rads);
-    const ty = Math.sin(rads);
-    return {
-      tx,
-      ty,
-    };
   }
 
   backgroundClicked() {
@@ -176,17 +164,13 @@ class SceneMain extends Phaser.Scene {
     this.tx = tx;
     this.ty = ty;
     let angle = this.physics.moveTo(this.ship, tx, ty, 90);
-    angle = this.toDegrees(angle);
+    angle = ToDegres(angle);
     this.ship.angle = angle;
     if (this.enemy.body) {
       let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 70);
-      angle2 = this.toDegrees(angle2);
+      angle2 = ToDegres(angle2);
       this.enemy.angle = angle2;
     }
-  }
-
-  toDegrees(angle) {
-    return angle * (180 / Math.PI);
   }
 
   collectStar(player, star) {
