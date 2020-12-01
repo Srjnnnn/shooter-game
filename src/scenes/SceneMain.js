@@ -17,6 +17,8 @@ class SceneMain extends Phaser.Scene {
     this.load.spritesheet('explosion', 'assets/exp.png', {
       frameWidth: 64, frameHeight: 64,
     });
+    this.load.audio('laser', 'assets/sndLaser.wav');
+    this.load.audio('explode', 'assets/explode.wav');
   }
 
   create() {
@@ -68,6 +70,8 @@ class SceneMain extends Phaser.Scene {
     });
 
     this.setTimer();
+    this.laser = this.sound.add('laser', { loop: false });
+    this.explode = this.sound.add('explode', { loop: false });
   }
 
   getTimer() {
@@ -81,6 +85,7 @@ class SceneMain extends Phaser.Scene {
     if (this.shield === 0) {
       window.model.playerWon = false;
       this.clearTimer();
+      this.explode.play();
       this.scene.start('SceneOver');
     }
   }
@@ -88,6 +93,10 @@ class SceneMain extends Phaser.Scene {
   downEnemy() {
     this.eShield--;
     this.text2.setText(`Enemy shields\n${this.eShield}`);
+    if (this.eShield === 0) {
+      this.enemy.destroy();
+      this.explode.play();
+    }
   }
 
   makeInfo() {
@@ -141,11 +150,13 @@ class SceneMain extends Phaser.Scene {
     if (elapsed < 500) {
       return;
     }
-    this.lastEbullet = this.getTimer();
-    const bullet = this.physics.add.sprite(this.enemy.x, this.enemy.y, 'enemyBullet');
-    bullet.body.angularVelocity = 10;
-    this.physics.moveTo(bullet, this.ship.x, this.ship.y, 50);
-    this.physics.add.collider(bullet, this.ship, this.damagePlayer, null, this);
+    if (this.enemy.body) {
+      this.lastEbullet = this.getTimer();
+      const bullet = this.physics.add.sprite(this.enemy.x, this.enemy.y, 'enemyBullet');
+      bullet.body.angularVelocity = 10;
+      this.physics.moveTo(bullet, this.ship.x, this.ship.y, 50);
+      this.physics.add.collider(bullet, this.ship, this.damagePlayer, null, this);
+    }
   }
 
   getDirFromAngle(angle) {
@@ -166,10 +177,12 @@ class SceneMain extends Phaser.Scene {
     let angle = this.physics.moveTo(this.ship, tx, ty, 90);
     angle = this.toDegrees(angle);
     this.ship.angle = angle;
-
-    let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 70);
-    angle2 = this.toDegrees(angle2);
-    this.enemy.angle = angle2;
+    if (this.enemy.body) {
+      let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 70);
+      angle2 = this.toDegrees(angle2);
+      this.enemy.angle = angle2;
+      console.log(this.enemy);
+    }
   }
 
   toDegrees(angle) {
@@ -195,6 +208,7 @@ class SceneMain extends Phaser.Scene {
     }
     if (this.cursors.space.isDown) {
       this.makeBullet();
+      this.laser.play();
     }
     const distX2 = Math.abs(this.ship.x - this.enemy.x);
     const distY2 = Math.abs(this.ship.y - this.enemy.y);
