@@ -86,6 +86,7 @@ class SceneMain extends Phaser.Scene {
       window.model.playerWon = false;
       this.clearTimer();
       this.explode.play();
+      window.model.backgroundMusic.stop();
       this.scene.start('SceneOver');
     }
   }
@@ -181,7 +182,6 @@ class SceneMain extends Phaser.Scene {
       let angle2 = this.physics.moveTo(this.enemy, this.ship.x, this.ship.y, 70);
       angle2 = this.toDegrees(angle2);
       this.enemy.angle = angle2;
-      console.log(this.enemy);
     }
   }
 
@@ -196,6 +196,7 @@ class SceneMain extends Phaser.Scene {
     if (window.model.point === 5) {
       window.model.playerWon = true;
       this.clearTimer();
+      window.model.backgroundMusic.stop();
       this.scene.start('SceneOver');
     }
   }
