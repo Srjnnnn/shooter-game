@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import SceneMain from './scenes/SceneMain';
+import Model from './Classes/Model';
+import SceneOver from './scenes/SceneOver';
 
 window.onload = () => {
   const config = {
@@ -13,7 +15,8 @@ window.onload = () => {
         debug: false,
       },
     },
-    scene: [SceneMain],
+    scene: [SceneMain, SceneOver],
   };
+  window.model = new Model();
   window.game = new Phaser.Game(config);
 };

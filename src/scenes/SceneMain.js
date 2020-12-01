@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Model from '../Classes/Model';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
@@ -24,9 +25,9 @@ class SceneMain extends Phaser.Scene {
     this.centerY = window.game.config.height / 2;
     this.background = this.add.image(0, 0, 'background');
     this.background.setOrigin(0, 0);
-    this.shield = 100;
+    this.shield = 5;
     this.eShield = 1000;
-    this.point = 0;
+    window.model.point = 0;
     this.ship = this.physics.add.sprite(this.centerX, this.centerY, 'ship');
     this.ship.scale = 0.65;
     this.enemy = this.physics.add.image(this.centerX, 25, 'enemy');
@@ -68,6 +69,7 @@ class SceneMain extends Phaser.Scene {
     });
 
     this.setTimer();
+    this.playerWon = null;
   }
 
   getTimer() {
@@ -78,6 +80,11 @@ class SceneMain extends Phaser.Scene {
   downPlayer() {
     this.shield--;
     this.text1.setText(`Shields\n${this.shield}`);
+    if (this.shield === 0) {
+      this.playerWon = false;
+      this.clearTimer();
+      this.scene.start('SceneOver');
+    }
   }
 
   downEnemy() {
@@ -87,7 +94,7 @@ class SceneMain extends Phaser.Scene {
 
   makeInfo() {
     this.i = 0;
-    this.text1 = this.add.text(50, 0, 'Shields\n100');
+    this.text1 = this.add.text(50, 0, 'Shields\n5');
     this.text2 = this.add.text(300, 0, 'Enemy shields\n 1000');
     this.text3 = this.add.text(150, 0, 'The point\n 0');
     this.text4 = this.add.text(15, 100, `Time: ${this.i}`);
@@ -99,10 +106,15 @@ class SceneMain extends Phaser.Scene {
   }
 
   setTimer() {
-    setInterval(() => {
+    this.timerVar = setInterval(() => {
       this.text4.setText(`Time: ${this.i++}`);
     }, 1000);
   }
+
+  clearTimer() {
+    clearInterval(this.timerVar);
+  }
+
 
   makeBullet() {
     const dirObj = this.getDirFromAngle(this.ship.angle);
@@ -112,7 +124,7 @@ class SceneMain extends Phaser.Scene {
     this.physics.add.collider(bullet, this.enemy, this.damageEnemy, null, this);
   }
 
-  damageEnemy(bullet, ship) {
+  damageEnemy(bullet) {
     const explosion = this.add.sprite(bullet.x, bullet.y, 'explosion');
     explosion.play('boom');
     bullet.destroy();
@@ -168,8 +180,13 @@ class SceneMain extends Phaser.Scene {
 
   collectStar(player, star) {
     star.disableBody(true, true);
-    this.point++;
-    this.text3.setText(`The point\n${this.point}`);
+    window.model.point += 1;
+    this.text3.setText(`The point\n${window.model.point}`);
+    if (window.model.point === 5) {
+      this.playerWon = true;
+      this.clearTimer();
+      this.scene.start('SceneOver');
+    }
   }
 
   update() {
@@ -188,5 +205,6 @@ class SceneMain extends Phaser.Scene {
     }
   }
 }
+
 
 export default SceneMain;
