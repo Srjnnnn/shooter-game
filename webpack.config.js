@@ -3,9 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    app: './src/index.js',
-  },
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'app.bundle.js',

@@ -18,7 +18,7 @@ const Fetcher = () => {
   //   },
   // );
 
-  fetch(
+  const fetched = fetch(
     'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/XthYmtC7N6WMKqS4zn5P/scores/', {
       method: 'POST',
       headers: {
@@ -34,6 +34,8 @@ const Fetcher = () => {
     ))
     .then(result => result.json())
     .then(result => result.result);
+
+  return fetched;
 };
 
 export default Fetcher;

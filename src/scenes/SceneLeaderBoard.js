@@ -7,12 +7,13 @@ export default class SceneLeaderBoard extends Phaser.Scene {
   }
 
   create() {
+    const fetched = Fetcher();
     let i = 0;
     (async () => {
-      await Fetcher().forEach(element => {
+      await fetched.then(response => response.forEach(element => {
         i += 40;
-        this.add.text(240, i, element, { fontSize: '20px', fill: '#fff' });
-      });
+        this.add.text(30, i, `The user is ${element.user}, the score is ${element.score}!`, { fontSize: '20px', fill: '#fff' });
+      }));
     })();
   }
 }
