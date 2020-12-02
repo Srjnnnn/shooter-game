@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
 

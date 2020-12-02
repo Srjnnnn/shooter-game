@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Phaser from 'phaser';
 import Fetcher from '../Functions/Fetcher';
 
