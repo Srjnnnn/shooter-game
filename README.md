@@ -34,9 +34,9 @@ Here is the [live link](https://sharp-lamport-8a5538.netlify.app/)
 
 - Clone this repository with ```git clone git@github.com:eypsrcnuygr/shooter-game.git``` using your terminal or command line.<br>
 - Change to the project directory by entering ```cd shooter-game``` in the terminal<br>
-- Next run ```yarn``` to install the necessary dependencies<br>
-- Run ```yarn run watch``` to have the necessary changes applied if you want to change anything in the codebase and to have a build folder.<br>
-- To run the local server run ```yarn run serve```.<br>
+- Next run ```npm install``` to install the necessary dependencies<br>
+- Run ```npm run watch``` to have the necessary changes applied if you want to change anything in the codebase and to have a build folder.<br>
+- To run the local server run ```npm run serve```.<br>
 - Wait for bundle to finish.<br>
 - Enjoy!<br>
 
