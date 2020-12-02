@@ -1,6 +1,5 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -43,9 +42,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
       'typeof WEBGL_RENDERER': JSON.stringify(true),
-    }),
-    new HtmlWebpackPlugin({
-      title: 'Caching',
     }),
   ],
   devtool: 'source-map',
