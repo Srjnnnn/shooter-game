@@ -31,7 +31,7 @@ class SceneMain extends Phaser.Scene {
     this.centerY = window.game.config.height / 2;
     this.background = this.add.image(0, 0, 'background');
     this.background.setOrigin(0, 0);
-    this.shield = 5;
+    this.shield = 10;
     this.eShield = 1000;
     window.model.point = 0;
     this.ship = this.physics.add.sprite(this.centerX, this.centerY, 'ship');
@@ -102,7 +102,7 @@ class SceneMain extends Phaser.Scene {
 
   makeInfo() {
     window.clock = 0;
-    this.text1 = this.add.text(50, 0, 'Shields\n5');
+    this.text1 = this.add.text(50, 0, 'Shields\n10');
     this.text2 = this.add.text(300, 0, 'Enemy shields\n 1000');
     this.text3 = this.add.text(150, 0, 'The point\n 0');
     this.text4 = this.add.text(15, 100, `Time: ${this.i}`);

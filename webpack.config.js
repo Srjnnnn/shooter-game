@@ -13,10 +13,11 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src/'),
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
+            presets: [['env', { targets: { node: 'current' } }]],
           },
         },
       },
