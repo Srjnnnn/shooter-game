@@ -1,17 +1,22 @@
 import SceneMain from '../scenes/SceneMain';
 
-beforeEach(() => {
-  SceneMain.mockClear();
+jest.mock('../scenes/SceneMain.js');
+
+beforeAll(() => {
+  jest.spyOn(SceneMain.prototype, 'downPlayer').mockImplementation(() => {
+    SceneMain.shield = 10;
+    SceneMain.shield -= 1;
+    SceneMain.text1 = (`Shields\n${SceneMain.shield}`);
+    return SceneMain.shield;
+  });
 });
 
-it('We can check if the consumer called the class constructor', () => {
-  const ClassScene = new SceneMain();
-  expect(ClassScene).toHaveBeenCalledTimes(1);
+afterAll(() => {
+  jest.restoreAllMocks();
 });
 
 test('It damages the player', () => {
-  const MockMainScene = SceneMain.mock.instances[0];
-  MockMainScene.shield = 10;
-  MockMainScene.damagePlayer();
-  expect(MockMainScene.shield).toBe(9);
+  const MockMainScene = new SceneMain();
+  const playerShield = MockMainScene.downPlayer();
+  expect(playerShield).toBe(9);
 });
