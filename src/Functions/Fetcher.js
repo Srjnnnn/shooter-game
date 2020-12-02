@@ -17,6 +17,7 @@ const Fetcher = () => {
     .then(response => fetch(
       `${response.url}`, {
         method: 'GET',
+        cors: 'no-cors',
       },
     ))
     .then(result => result.json())
