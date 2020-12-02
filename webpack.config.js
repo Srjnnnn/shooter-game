@@ -1,5 +1,7 @@
-const webpack = require('webpack');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -32,9 +34,18 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'build'),
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'index.html'), to: path.resolve(__dirname, 'build') },
+        { from: path.resolve(__dirname, 'assets', '**', '*'), to: path.resolve(__dirname, 'build') },
+      ],
+    }),
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
       'typeof WEBGL_RENDERER': JSON.stringify(true),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Caching',
     }),
   ],
   devtool: 'source-map',
