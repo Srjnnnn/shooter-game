@@ -41,7 +41,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "phaser": "^3.24.1"
   }
 }

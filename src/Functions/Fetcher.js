@@ -9,15 +9,14 @@ const Fetcher = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
       },
+      cors: 'no-cors',
       body: JSON.stringify(PostVar2),
     },
   )
     .then(response => fetch(
       `${response.url}`, {
         method: 'GET',
-        mode: 'no-cors',
       },
     ))
     .then(result => result.json())
