@@ -9,12 +9,6 @@ jobs:
   eslint:
     name: ESLint
     runs-on: ubuntu-18.04
-    rules: {
-   "import/no-unresolved": [
-      2, 
-      { "caseSensitive": false }
-   ]
-}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
