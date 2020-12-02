@@ -1,4 +1,4 @@
-# Project-Library
+# Shooter Game
 
 This is the capstone project on Microverse curriculum for JS. Here I've built a browser game which is a spaceship shooter game with Phaser. 
 
@@ -60,8 +60,13 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
--   This Project was part of an assignment available on The Odin Project.
+-   This Project was part of an assignment of Microverse.
 -   Our thanks to Microverse and all our peers and colleagues there.
+-   The background music credits are:<br> 
+Track: Suspense Scary Music<br>
+Music composed and recorded by Oak Studios<br>
+Creative Commons - Attribution ND 4.0<br>
+[youtube link](https://youtu.be/tJkQs5xEhPU)<br>
 
 ## 📝 License
 
