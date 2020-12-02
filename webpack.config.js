@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');

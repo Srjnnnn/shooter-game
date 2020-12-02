@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Phaser from 'phaser';
 import GetTimer from '../Functions/GetTimer';
 import GetDirFromAngle from '../Functions/GetDirFromAngle';

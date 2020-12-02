@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Phaser from 'phaser';
 import SceneMain from './scenes/SceneMain';
 import Model from './Classes/Model';
