@@ -1,9 +1,11 @@
 import Phaser from 'phaser';
+import cors from 'cors';
 import SceneMain from './scenes/SceneMain';
 import Model from './Classes/Model';
 import SceneIntro from './scenes/SceneIntro';
 import SceneOver from './scenes/SceneOver';
 import SceneLeaderBoard from './scenes/SceneLeaderBoard';
+
 
 window.onload = () => {
   const config = {
@@ -24,4 +26,5 @@ window.onload = () => {
   };
   window.model = new Model();
   window.game = new Phaser.Game(config);
+  window.game.use(cors);
 };
