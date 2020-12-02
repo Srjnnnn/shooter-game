@@ -7,12 +7,6 @@ class SceneIntro extends Phaser.Scene {
     super('SceneIntro');
   }
 
-  preload() {
-    this.load.image('play', 'assets/Play.png');
-    this.load.audio('mainTheme', 'assets/mainTheme.wav');
-    this.load.html('nameform', 'assets/loginform.html');
-  }
-
   create() {
     this.btnStart = new Button(this, 300, 250, 'play', 'play', '', 'SceneMain');
     this.SoundButton = this.add.text(420, 50, 'Toggle-Sound').setInteractive();

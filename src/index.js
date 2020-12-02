@@ -5,6 +5,7 @@ import Model from './Classes/Model';
 import SceneIntro from './scenes/SceneIntro';
 import SceneOver from './scenes/SceneOver';
 import SceneLeaderBoard from './scenes/SceneLeaderBoard';
+import PreloadScene from './scenes/PreLoadScene';
 
 
 window.onload = () => {
@@ -22,7 +23,7 @@ window.onload = () => {
         debug: false,
       },
     },
-    scene: [SceneIntro, SceneMain, SceneOver, SceneLeaderBoard],
+    scene: [PreloadScene, SceneIntro, SceneMain, SceneOver, SceneLeaderBoard],
   };
   window.model = new Model();
   window.game = new Phaser.Game(config);
