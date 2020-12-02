@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
 import Toggler from '../Functions/Toggler';
+import Play from '../../assets/Play.png';
 
 class SceneIntro extends Phaser.Scene {
   constructor() {
@@ -8,7 +9,7 @@ class SceneIntro extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('play', 'assets/Play.png');
+    this.load.image('play', Play);
     this.load.audio('mainTheme', 'assets/mainTheme.wav');
     this.load.html('nameform', 'assets/loginform.html');
   }
