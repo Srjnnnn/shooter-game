@@ -11,8 +11,8 @@ import PreloadScene from './scenes/PreLoadScene';
 window.onload = () => {
   const config = {
     type: Phaser.AUTO,
-    width: 600,
-    height: 600,
+    width: 800,
+    height: 800,
     dom: {
       createContainer: true,
     },
