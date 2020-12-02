@@ -46,7 +46,7 @@ module.exports = {
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new HtmlWebpackPlugin({
-      title: 'Caching',
+      title: 'EypSrcnShooterGame',
     }),
   ],
   devtool: 'source-map',
