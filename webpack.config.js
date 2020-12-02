@@ -1,12 +1,19 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: {
+    index: {
+      import: './src/index.js',
+      dependOn: 'shared',
+    },
+    shared: 'lodash',
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'app.bundle.js',
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -37,6 +44,12 @@ module.exports = {
       'typeof CANVAS_RENDERER': JSON.stringify(true),
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
+    new HtmlWebpackPlugin({
+      title: 'Caching',
+    }),
   ],
   devtool: 'source-map',
+  optimization: {
+    runtimeChunk: 'single',
+  },
 };
