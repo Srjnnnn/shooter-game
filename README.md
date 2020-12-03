@@ -22,12 +22,6 @@ To get this project up and running locally, you must have node installed on your
 
 Here is the [live link](https://sharp-lamport-8a5538.netlify.app/)
 
-## Important Notice
-
-- The initial blank screen take a bit long, because the audio file is big enough to slow-down the network request.
-- Rİght now it gives a cors error but I've configured the app with no cors policy. There must be a problem with the API.
-
-
 ## Getting Started
 
 **Setup**
