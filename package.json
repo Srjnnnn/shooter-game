@@ -7,21 +7,41 @@
   "author": "Eyüp Sercan UYGUR",
   "license": "MIT",
   "private": true,
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "watch:test": "jest --watchAll",
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "6",
+    "babel-eslint": "10.1.x",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^7.0.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "copy-webpack-plugin": "^6.3.2",
+    "eslint": "6.8.x",
+    "eslint-config-airbnb-base": "14.1.x",
+    "eslint-plugin-import": "2.20.x",
+    "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.0",
+    "stylelint": "13.3.x",
+    "stylelint-config-standard": "20.0.x",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "3.17.x",
     "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "phaser": "^3.0.0"
+    "html-webpack-plugin": "^4.5.0",
+    "phaser": "^3.24.1"
   }
 }

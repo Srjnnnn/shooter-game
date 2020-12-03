@@ -1,0 +1,1 @@
+(self.webpackChunkshooter_game=self.webpackChunkshooter_game||[]).push([[712],{},0,[[486,666,216]]]);
