@@ -50,6 +50,15 @@ Here is the [live link](https://sharp-lamport-8a5538.netlify.app/)
 - When the game finished to post your score to the API please click the leaderboard icon in the middle.<br>
 - After clicking the icon you'll be redirected to a leaderboard page, which shows the highest 10 player till at that moment.<br>
 
+**Repository Content**
+
+- There are 5 scenes can be found on scenes folder.
+- One object, Button, can be found on Objects folder.
+- The game is initialized on index.js as a global object.
+- There are 7 helper functions can be found on Functions folder, some related wiht logic, some related with UI.
+- The assets can be found on assets folder, which are copied into build as well.
+- The Classes folder is just one class which is instantiated on index.js and assigned to global model object.
+
 ## Authors
 
 👤 **Eyüp Sercan UYGUR**
