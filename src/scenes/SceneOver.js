@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import Button from '../Objects/Button';
 
 export default class SceneOver extends Phaser.Scene {
   constructor() {
@@ -24,7 +23,6 @@ export default class SceneOver extends Phaser.Scene {
       this.explanation = this.add.text(50, this.game.config.height / 2, `You've lost the game\n Your score is ${window.model.point}`);
       this.explanation2 = this.add.text(50, this.game.config.height / 2 + 50, `Your time is: ${window.model.clock}`);
     }
-    this.btnStart = new Button(this, 500, this.game.config.height / 2 + 50, 'Re-play', 'Re-play', '', 'SceneIntro');
     this.leaderboard.on('pointerdown', () => this.scene.start('SceneLeaderBoard'));
   }
 }
