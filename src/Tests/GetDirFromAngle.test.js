@@ -6,4 +6,6 @@ test('It gives the right x and y coordinates', () => {
   const answerty = parseFloat(coordinates.ty.toFixed(1));
   expect(answerty).toBe(0.5);
   expect(answertx).toBe(parseFloat((Math.sqrt(3) / 2).toFixed(1)));
+  expect(answerty).not.toBe(1);
+  expect(answertx).not.toBe(1);
 });

@@ -177,7 +177,7 @@ class SceneMain extends Phaser.Scene {
 
   collectStar(player, star) {
     star.disableBody(true, true);
-    window.model.point += 1;
+    window.model.point += 10;
     this.text3.setText(`The point\n${window.model.point}`);
     if (window.model.point === 50) {
       window.model.playerWon = true;

@@ -19,4 +19,5 @@ test('It damages the enemy', () => {
   const MockMainScene = new SceneMain();
   const EnemyShield = MockMainScene.downEnemy();
   expect(EnemyShield).toBe(9);
+  expect(EnemyShield).not.toBe(10);
 });

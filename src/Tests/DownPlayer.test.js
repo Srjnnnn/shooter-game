@@ -19,4 +19,5 @@ test('It damages the player', () => {
   const MockMainScene = new SceneMain();
   const playerShield = MockMainScene.downPlayer();
   expect(playerShield).toBe(9);
+  expect(playerShield).not.toBe(10);
 });
