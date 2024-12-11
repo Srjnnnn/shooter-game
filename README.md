@@ -57,9 +57,9 @@ Here is the [live link](https://sharp-lamport-8a5538.netlify.app/)
 
 👤 **Eyüp Sercan UYGUR**
 
-- Github: [@SanriGirdabi](https://github.com/SanriGirdabi)
-- Twitter: [@sanri_girdabi](https://twitter.com/sanri_girdabi)
-- LinkedIn: [srcnuygr](https://www.linkedin.com/in/srcnuygr/)
+- Github: [@Srjnnnn](https://github.com/Srjnnnn)
+- Twitter: [@srjnnnn](https://twitter.com/srjnnnn)
+- LinkedIn: [eypsrcnuygr](https://www.linkedin.com/in/eypsrcnuygr/)
 - Email: [Eyüp Sercan UYGUR](sercanuygur@gmail.com)
 
 
